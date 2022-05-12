@@ -16,3 +16,5 @@ def TextCnn(vocabulary_size, max_value_length):
     model.add(Dense(64, activation="relu"))
     model.add(Dropout(0.2))
     model.add(Dense(1, activation="sigmoid"))
+
+    model.summary()
