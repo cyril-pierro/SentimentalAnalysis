@@ -8,6 +8,10 @@ import pandas as pd
 
 # read and convert file contents into Dataframes
 def read_and_create_dataframe(file_path):
+    """
+    Function to read a group of text files
+    and convert them into a single dataframe
+    """
     import pathlib
     file_path = pathlib.Path(file_path)
 
@@ -25,3 +29,6 @@ def read_and_create_dataframe(file_path):
     # concatenate the various dataframes into one
     df = pd.concat(dataframe_lists)
     return df
+
+
+df = read_and_create_dataframe("./dataset/")
