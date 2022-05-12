@@ -2,6 +2,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
 import numpy as np
 import pandas as pd
 from .model import TextCnn
@@ -79,6 +80,11 @@ model = TextCnn(vocabulary_size, max_value_length)
 
 # compile the model
 model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
+
+# add a tensor callback to visualize progress
+model_callback = tf.keras.callbacks.TensorBoard(
+    log_dir="./log", embeddings_freq=3, update_freq="batch")
+
 
 # train model
 model.fit(X_train, y_train, epochs=20)
