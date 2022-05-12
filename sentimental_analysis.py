@@ -3,9 +3,11 @@ from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pandas as pd
-
+from .model import TextCnn
 
 # read and convert file contents into Dataframes
+
+
 def read_and_create_dataframe(file_path):
     """
     Function to read a group of text files
@@ -53,6 +55,10 @@ X = pad_sequences(df["encoded"], max_value_length, padding="post")
 y = df["remarks"]
 
 # split the dataset into two
-
-x_train, x_test, y_train, y_test = train_test_split(
+X_train, x_test, y_train, y_test = train_test_split(
     X, y, random_state=30, stratify=y, test_size=0.3)
+
+# get the model
+model = TextCnn(vocabulary_size, max_value_length)
+
+# compile the model
