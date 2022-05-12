@@ -55,7 +55,7 @@ X = pad_sequences(df["encoded"], max_value_length, padding="post")
 y = df["remarks"]
 
 # split the dataset into two
-X_train, x_test, y_train, y_test = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y, random_state=30, stratify=y, test_size=0.3)
 
 # get the model
@@ -66,3 +66,7 @@ model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
 
 # train model
 model.fit(X_train, y_train, epochs=20)
+
+# evaluate model
+loss, accuracy = model.evaluate(X_test, y_test)
+print(loss, accuracy)
