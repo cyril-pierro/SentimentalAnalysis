@@ -1,4 +1,4 @@
-from idna import valid_contextj
+from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import Sequential
@@ -53,3 +53,8 @@ df["encoded"] = df.messages.apply(lambda x: one_hot(x, vocabulary_size))
 X = pad_sequences(df["encoded"], max_value_length, padding="post")
 
 y = df["remarks"]
+
+# split the dataset into two
+
+x_train, x_test, y_train, y_test = train_test_split(
+    X, y, random_state=30, stratify=y, test_size=0.3)
