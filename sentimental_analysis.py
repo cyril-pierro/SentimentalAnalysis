@@ -21,3 +21,7 @@ def read_and_create_dataframe(file_path):
             "messages", "remarks"], engine="python")
         for filename in file_names
     ]
+
+    # concatenate the various dataframes into one
+    df = pd.concat(dataframe_lists)
+    return df
