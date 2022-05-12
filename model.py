@@ -10,3 +10,4 @@ def TextCnn(vocabulary_size, max_value_length):
     model = Sequential()
     model.add(Embedding(vocabulary_size, embedding_vector_size,
               input_length=max_value_length, name='embedding'))
+    model.add(Conv1D(64, 3, activation="relu"))
