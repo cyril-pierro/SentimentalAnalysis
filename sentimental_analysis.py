@@ -1,9 +1,11 @@
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
 import numpy as np
 import pandas as pd
-from .model import TextCnn
+import model
 
 # read and convert file contents into Dataframes
 
@@ -30,6 +32,21 @@ def read_and_create_dataframe(file_path):
     # concatenate the various dataframes into one
     df = pd.concat(dataframe_lists)
     return df
+
+
+def predicted_values(y_test, X_test):
+    """
+    Predicts the values and converts it to 1 or 0
+    """
+    y_pred = model.predict(X_test)
+    y_pred = y_pred.reshape(-1)
+    y_pred_formated = []
+    for values in y_pred:
+        if values > 0.5:
+            y_pred_formated.append(1)
+        else:
+            y_pred_formated.append(0)
+    return y_pred_formated
 
 
 df = read_and_create_dataframe("./dataset/")
@@ -59,19 +76,23 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, random_state=30, stratify=y, test_size=0.3)
 
 # get the model
-model = TextCnn(vocabulary_size, max_value_length)
+model = model.TextCnn(vocabulary_size, max_value_length)
 
 # compile the model
 model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
 
+# add a tensor callback to visualize progress
+model_callback = tf.keras.callbacks.TensorBoard(
+    log_dir="./log", embeddings_freq=3, update_freq="batch")
+
+
 # train model
-model.fit(X_train, y_train, epochs=20)
+model.fit(X_train, y_train, epochs=20, callback=model_callback)
 
 # evaluate model
 loss, accuracy = model.evaluate(X_test, y_test)
 print(loss, accuracy)
 
 
-def report_of_model(y_pred, y_test, X_test):
-    y_pred = model.predict(X_test)
-    y_pred = y_pred.reshape(-1)
+y_pred = predicted_values(y_test, X_test)
+print(classification_report(y_pred, y_test))
