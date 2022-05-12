@@ -1,3 +1,4 @@
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -32,7 +33,7 @@ def read_and_create_dataframe(file_path):
     return df
 
 
-def predicted_values(y_pred, y_test, X_test):
+def predicted_values(y_test, X_test):
     """
     Predicts the values and converts it to 1 or 0
     """
@@ -85,3 +86,7 @@ model.fit(X_train, y_train, epochs=20)
 # evaluate model
 loss, accuracy = model.evaluate(X_test, y_test)
 print(loss, accuracy)
+
+
+y_pred = predicted_values(y_test, X_test)
+print(classification_report(y_pred, y_test))
