@@ -74,3 +74,4 @@ print(loss, accuracy)
 
 def report_of_model(y_pred, y_test, X_test):
     y_pred = model.predict(X_test)
+    y_pred = y_pred.reshape(-1)
