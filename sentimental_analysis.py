@@ -5,7 +5,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf
 import numpy as np
 import pandas as pd
-from .model import TextCnn
+import model
 
 # read and convert file contents into Dataframes
 
@@ -76,7 +76,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, random_state=30, stratify=y, test_size=0.3)
 
 # get the model
-model = TextCnn(vocabulary_size, max_value_length)
+model = model.TextCnn(vocabulary_size, max_value_length)
 
 # compile the model
 model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
