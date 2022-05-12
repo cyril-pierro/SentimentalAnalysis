@@ -8,4 +8,9 @@ import pandas as pd
 
 # read and convert file contents into Dataframes
 def read_and_create_dataframe(file_path):
-    pass
+    import pathlib
+    file_path = pathlib.Path(file_path)
+
+    # convert the file_path instance to list
+    # search text files in the file_path specified
+    file_names = list(file_path.glob("*.txt"))
