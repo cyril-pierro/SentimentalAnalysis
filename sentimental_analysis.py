@@ -40,3 +40,6 @@ print(df["messages"].head(5))
 # get the maximum value length
 max_value = [len(i) for i in df["messages"]]
 max_value_length = max(max_value)
+
+# get the vocabulary_size by using the length of the df
+vocabulary_size = len(df)
