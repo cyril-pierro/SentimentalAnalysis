@@ -32,21 +32,6 @@ def read_and_create_dataframe(file_path):
     return df
 
 
-def predicted_values(y_pred, y_test, X_test):
-    """
-    Predicts the values and converts it to 1 or 0
-    """
-    y_pred = model.predict(X_test)
-    y_pred = y_pred.reshape(-1)
-    y_pred_formated = []
-    for values in y_pred:
-        if values > 0.5:
-            y_pred_formated.append(1)
-        else:
-            y_pred_formated.append(0)
-    return y_pred_formated
-
-
 df = read_and_create_dataframe("./dataset/")
 
 
@@ -85,3 +70,8 @@ model.fit(X_train, y_train, epochs=20)
 # evaluate model
 loss, accuracy = model.evaluate(X_test, y_test)
 print(loss, accuracy)
+
+
+def report_of_model(y_pred, y_test, X_test):
+    y_pred = model.predict(X_test)
+    y_pred = y_pred.reshape(-1)
