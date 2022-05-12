@@ -62,3 +62,4 @@ X_train, x_test, y_train, y_test = train_test_split(
 model = TextCnn(vocabulary_size, max_value_length)
 
 # compile the model
+model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
