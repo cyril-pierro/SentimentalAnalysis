@@ -14,3 +14,10 @@ def read_and_create_dataframe(file_path):
     # convert the file_path instance to list
     # search text files in the file_path specified
     file_names = list(file_path.glob("*.txt"))
+
+    # generate the various dataframes of path files
+    dataframe_lists = [
+        pd.read_csv(filename, sep=".\t", names=[
+            "messages", "remarks"], engine="python")
+        for filename in file_names
+    ]
