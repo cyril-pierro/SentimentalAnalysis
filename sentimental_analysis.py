@@ -47,3 +47,7 @@ vocabulary_size = len(df)
 
 # perform one hot encoding for text messages
 df["encoded"] = df.messages.apply(lambda x: one_hot(x, vocabulary_size))
+
+
+# add a padding sequences to fill in zero values in encoded vector
+X = pad_sequences(df["encoded"], max_value_length, padding="post")
