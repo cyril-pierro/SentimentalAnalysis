@@ -70,3 +70,7 @@ model.fit(X_train, y_train, epochs=20)
 # evaluate model
 loss, accuracy = model.evaluate(X_test, y_test)
 print(loss, accuracy)
+
+
+def report_of_model(y_pred, y_test, X_test):
+    y_pred = model.predict(X_test)
