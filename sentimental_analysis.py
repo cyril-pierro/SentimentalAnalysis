@@ -63,3 +63,6 @@ model = TextCnn(vocabulary_size, max_value_length)
 
 # compile the model
 model.compile(loss="mse", metrics=["accuracy"], optimizer="adam")
+
+# train model
+model.fit(X_train, y_train, epochs=20)
