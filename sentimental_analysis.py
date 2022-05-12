@@ -32,3 +32,7 @@ def read_and_create_dataframe(file_path):
 
 
 df = read_and_create_dataframe("./dataset/")
+
+
+# analyze dataframe
+print(df["messages"].head(5))
