@@ -87,7 +87,7 @@ model_callback = tf.keras.callbacks.TensorBoard(
 
 
 # train model
-model.fit(X_train, y_train, epochs=20)
+model.fit(X_train, y_train, epochs=20, callback=model_callback)
 
 # evaluate model
 loss, accuracy = model.evaluate(X_test, y_test)
