@@ -13,3 +13,4 @@ def TextCnn(vocabulary_size, max_value_length):
     model.add(Conv1D(64, 3, activation="relu"))
     model.add(GlobalMaxPool1D())
     model.add(Flatten())
+    model.add(Dense(64, activation="relu"))
