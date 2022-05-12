@@ -1,3 +1,4 @@
+from idna import valid_contextj
 from tensorflow.keras.preprocessing.text import one_hot
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import Sequential
@@ -43,3 +44,6 @@ max_value_length = max(max_value)
 
 # get the vocabulary_size by using the length of the df
 vocabulary_size = len(df)
+
+# perform one hot encoding for text messages
+df["encoded"] = df.messages.apply(lambda x: one_hot(x, vocabulary_size))
